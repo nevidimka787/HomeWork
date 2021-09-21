@@ -8,20 +8,32 @@
 #define TRUE 1
 #define FALSE 0
 
-uint8_t GetNumber(int64_t x, uint64_t exp);
+#define NEGATIVE 1
+#define POSITIVE 0
+
+#define EXP_0   1
+#define EXP_1   10
+
+//The function get digit from number from end position of the exponent.
+uint8_t GetDigit(int64_t x, uint64_t exp);
+//The functon inverts numbers in DEC value inside the exponent.
 int64_t Invert(int64_t x, uint64_t exp);
 
 int main()
 {
-    int64_t value = 0;
+    //output before point value  before point
+    int64_t before_point_value  = 0;
+    //output after point value  after point
     int64_t after_point_value = 0;
     
-    
+    //current character
     char buffer;
     
-    uint64_t point = 1;
+    //curren exponent
+    uint64_t point = EXP_0;
     
-    uint8_t sign = FALSE;
+    //sign of the input value
+    uint8_t sign = POSITIVE;
     uint8_t point_found = FALSE;
     uint8_t first_zero = TRUE;
     uint8_t zero_count = 0;
@@ -31,9 +43,9 @@ int main()
         switch(buffer)
         {
         case '-':
-            if(point == 1)
+            if(point == EXP_0)
             {
-                sign = TRUE;
+                sign = NEGATIVE;
             }
             else
             {
@@ -45,7 +57,7 @@ int main()
             if(!point_found)
             {
                 point_found = TRUE;
-                value = Invert(value, point / 10);
+                before_point_value = Invert(before_point_value, point / EXP_1);
                 point = 1;
             }
             else
@@ -59,7 +71,7 @@ int main()
             {
                 zero_count++;
             }
-            point *= 10;
+            point *= EXP_1;
             break;
         case '1':
         case '2':
@@ -77,12 +89,12 @@ int main()
             if(point_found)
             {
                 after_point_value += (buffer - '0') * point;
-                point *= 10;
+                point *= EXP_1;
             }
             else
             {
-                value += (buffer - '0') * point;
-                point *= 10;
+                before_point_value += (buffer - '0') * point;
+                point *= EXP_1;
             }
             break;
         case ' ':
@@ -92,7 +104,7 @@ int main()
             exit(-1);
             break;
         }
-        if(point % 10 && point != 1)
+        if(point % EXP_1 && point != 1)
         {
             printf("Input error: Input value is hight.\n");
             exit(-1);
@@ -106,14 +118,14 @@ int main()
         exit(-1);
     }
     
-    after_point_value = Invert(after_point_value, point / 10);
+    after_point_value = Invert(after_point_value, point / EXP_1);
     
-    if(sign)
+    if(sign == NEGATIVE)
     {
-        value *= -1;
+        before_point_value *= -1;
     }
     
-    printf("%li | ", value);
+    printf("%li | ", before_point_value);
     
     if(after_point_value)
     {
@@ -129,19 +141,20 @@ int main()
 
 int64_t Invert(int64_t x, uint64_t exp)
 {
+    //return value
     int64_t r_x = 0;
-    uint64_t p = 1;
+    uint64_t p = EXP_0;
     
-    for(uint64_t e = exp; e > 0; e /= 10)
+    for(uint64_t e = exp; e > 0; e /= EXP_1)
     {
-        r_x += GetNumber(x, e) * p;
-        p *= 10;
+        r_x += GetDigit(x, e) * p;
+        p *= EXP_1;
     }
     
     return r_x;
 }
 
-uint8_t GetNumber(int64_t x, uint64_t exp)
+uint8_t GetDigit(int64_t x, uint64_t exp)
 {
     if(x < 0)
     {
@@ -151,7 +164,7 @@ uint8_t GetNumber(int64_t x, uint64_t exp)
     {
         return 0;
     }
-    return (x / exp) % 10;
+    return (x / exp) % EXP_1;
 }
 
 

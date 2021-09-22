@@ -1,6 +1,6 @@
 # HomeWork 1
 The repository collect my solutions of home tasks.
-My aasigment number is 3.
+My task number is 3.
 
 The code wrote on ubuntu 18.04.
 

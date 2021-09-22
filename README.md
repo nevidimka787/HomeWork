@@ -1,4 +1,4 @@
-# HomeWork
+# HomeWork 1
 The repository collect my solutions of home tasks.
 
 The code wrote on ubuntu 18.04.

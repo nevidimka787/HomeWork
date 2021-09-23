@@ -1,5 +1,6 @@
-# HomeWork
-The repository collect my solutions of home tasks. My variant is 3.
+# HomeWork 1
+The repository collect my solutions of home tasks.
+My task number is 3.
 
 The code wrote on ubuntu 18.04.
 
@@ -16,4 +17,3 @@ The program can work this negavive numbers.
 The program can handle number owerflow.
 
 Program use standart libraries only.
-

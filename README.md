@@ -1,5 +1,5 @@
 # HomeWork
-The repository collect my solutions of home tasks.
+The repository collect my solutions of home tasks. My variant is 3.
 
 The code wrote on ubuntu 18.04.
 

@@ -1,7 +1,6 @@
 # HomeWork 1
 The repository collect my solutions of home tasks.
 My task number is 3.
-I have different variants in different lists.
 
 The code wrote on ubuntu 18.04.
 

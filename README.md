@@ -4,7 +4,7 @@ My task number is 3.
 
 The code wrote on ubuntu 18.04.
 
-# Buildimg program
+# Building program
 
 1) Open terminal in folder whis repository.
 2) To compele program for third variant paste comand cc task_variant_3.c -o.o o.o to the terminal.
